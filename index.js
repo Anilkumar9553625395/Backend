@@ -10,10 +10,11 @@ app.use(cors());
 
 // Create MySQL connection
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Anil@12345',
-  database: 'test_1'
+  host: 'details-1.cz0qig6oabnx.us-east-2.rds.amazonaws.com',
+  port: 3306,
+  user: 'admin',
+  password: 'Anil12345',
+  database: 'taxi'
 });
 
 // Connect to MySQL
@@ -32,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // API endpoint to handle passenger submission
 app.post('/passenger', (req, res) => {
   const { startingPoint, destination, phoneNumber, pickupDate, pickupTime, dropTime } = req.body;
-
+  console.log(startingPoint, destination, phoneNumber, pickupDate, pickupTime, dropTime);
   // Insert passenger data into passengers table
   const query = 'INSERT INTO passengers (starting_point, destination, phone_number, pickup_date, pickup_time, drop_time) VALUES (?, ?, ?, ?, ?, ?)';
   connection.query(query, [startingPoint, destination, phoneNumber, pickupDate, pickupTime, dropTime], (err, results) => {
